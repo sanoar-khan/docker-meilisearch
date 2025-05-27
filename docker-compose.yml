@@ -1,0 +1,17 @@
+services:
+  meilisearch:
+    image: getmeili/meilisearch:${MEILI_IMAGE_TAG}
+    container_name: meilisearch
+    restart: always
+    ports:
+      - ${MEILI_PORT}:7700
+    environment:
+      - MEILI_MASTER_KEY=${MEILI_MASTER_KEY}
+    volumes:
+      - ./data/meilisearch:/meili_data
+    networks:
+      - search-network
+
+networks:
+  search-network:
+    driver: bridge
